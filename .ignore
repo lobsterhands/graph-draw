@@ -1,0 +1,7 @@
+/build/**/*.js
+/examples/**/*.html
+/examples/**/*.js
+/examples/**/*.babelrc
+/examples/**/*.json
+/examples/**/*.md
+/examples/**/*.css
