@@ -8,6 +8,6 @@ var GraphDraw = React.createClass({
 });
 
 ReactDOM.render(
-    <h1>GraphDraw</h1>,
+    <GraphDraw />,
     document.getElementById('graph-draw')
 );
