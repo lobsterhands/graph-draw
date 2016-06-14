@@ -3,11 +3,76 @@
  */
 var GraphDraw = React.createClass({
   render: function() {
-
+    return (
+        <NavBar />
+        )
   }
 });
 
+/*
+  - NavBar
+    - Buttons
+      - Drop-down options
+ */
+var NavBar = React.createClass({
+  render: function() {
+    return (
+        <div className="navBar">
+          <AddNode />
+          <AddVertex />
+          <DeleteNode />
+        </div>
+    )
+  }
+});
+
+// BEGIN NavButtons -> Separate Component File
+var AddNode = React.createClass({
+  handleClick: function(event) {
+    event.preventDefault();
+    console.log('+Node');
+  },
+  render: function() {
+    return (
+        <a onClick={this.handleClick} className="btnAddNode">
+          +Node
+        </a>
+    )
+  }
+  // OnClick to drag node thus changing vertex length
+});
+
+var AddVertex = React.createClass({
+  handleClick: function(event) {
+    event.preventDefault();
+    console.log('+Vertex');
+  },
+  render: function() {
+    return (
+        <a onClick={this.handleClick} className="btnAddVertex">
+          +Vertex
+        </a>
+    )
+  }
+});
+
+var DeleteNode = React.createClass({
+  handleClick: function(event) {
+    event.preventDefault();
+    console.log('-Node');
+  },
+  render: function() {
+    return (
+        <a onClick={this.handleClick} className="btnDeleteNode">
+          -Node
+        </a>
+
+    )
+  }
+});
+// END NavButtons
+
 ReactDOM.render(
     <GraphDraw />,
-    document.getElementById('graph-draw')
+    document.getElementById('graphDraw')
 );
