@@ -4,8 +4,11 @@
 var GraphDraw = React.createClass({
   render: function() {
     return (
-        <NavBar />
-        )
+        <div className="graphDrawContainer">
+          <NavBar />
+          <GraphDrawSVG />
+        </div>
+    )
   }
 });
 
@@ -66,11 +69,24 @@ var DeleteNode = React.createClass({
         <a onClick={this.handleClick} className="btnDeleteNode">
           -Node
         </a>
-
     )
   }
 });
 // END NavButtons
+
+// BEGIN SVG
+var GraphDrawSVG = React.createClass({
+  test: function(msg) {
+    console.log(msg);
+  },
+  render: function() {
+    return (
+        <svg className="graphDrawSVG">
+        </svg>
+    )
+  }
+});
+// END SVG
 
 ReactDOM.render(
     <GraphDraw />,
