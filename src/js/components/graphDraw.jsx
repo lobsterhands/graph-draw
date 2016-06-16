@@ -9,6 +9,7 @@
     - Buttons
       - Drop-down options
  */
+
 class NavBar extends React.Component {
     handleClickAdd(event) {
         event.preventDefault();

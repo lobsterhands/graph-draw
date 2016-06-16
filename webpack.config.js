@@ -8,12 +8,12 @@ var webpack = require('webpack');
 module.exports = {
     context: __dirname, // where the app lives
     devtool: debug ? "inline-sourcemap" : null,
-    entry: "./src/js/scripts.jsx",
+    entry: "./src/js/components/GraphDraw.jsx",
     module: {
       loaders: [
           {
-              test: /\.js?$/,
-              exclude: /(node_modules|bower_components)/,
+              test: /\.jsx?$/,
+              exclude: /node_modules/,
               loader: 'babel-loader',
               query: {
                   presets: ['react', 'es2015']
@@ -22,8 +22,8 @@ module.exports = {
       ]
     },
     output: {
-        path: __dirname + "/src/js",//+ "./src/js/",
-        filename: "scripts.min.js"
+        path: __dirname + "/build",
+        filename: "app.min.js"
     },
     plugins: debug ? [] : [ // do this if we are in production mode
         new webpack.optimize.DedupePlugin(),
