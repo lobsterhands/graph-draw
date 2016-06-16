@@ -2,13 +2,17 @@
  * Created by Lyle Denman on 6/13/16.
  */
 
-// import SayHello from "helloworld";
 
 /*
   - NavBar
     - Buttons
       - Drop-down options
  */
+
+import React from 'react';
+import ReactDOM from 'react-dom';
+
+import Hello from './SayHello';
 
 class NavBar extends React.Component {
     handleClickAdd(event) {
@@ -80,7 +84,9 @@ class DeleteNode extends React.Component {
 class GraphDrawSVG extends React.Component {
     render() {
         return (
-            <svg className="graphDrawSVG" width={600} height={400}>svg</svg>
+            <div id="GraphDrawSVG">
+                <svg className="gd-svg" width={600} height={400}></svg>
+            </div>
         )
     }
 }
@@ -105,6 +111,7 @@ var GraphDrawApp = React.createClass({
                 <NavBar name={this.state.name} />
                 <GraphDrawSVG />
                 <HelloMessage name={this.state.name} lastName="Denman"/>
+                <Hello />
             </div>
         )
     }

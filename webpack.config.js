@@ -28,6 +28,6 @@ module.exports = {
     plugins: debug ? [] : [ // do this if we are in production mode
         new webpack.optimize.DedupePlugin(),
         new webpack.optimize.OccurenceOrderPlugin(),
-        new webpack.optimize.UglifyJsPlugin({ mangle: false, sourcemap: false }),
+        new webpack.optimize.UglifyJsPlugin({ mangle: false, sourcemap: false })
     ]
 };
