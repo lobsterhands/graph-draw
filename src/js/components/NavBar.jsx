@@ -2,18 +2,21 @@ import React from 'react';
 
 export default class NavBar extends React.Component {
     handleClickAdd(event) {
+        var { name, testStatus } = this.props;
         event.preventDefault();
         console.log('+Node2');
-        console.log(this.props.name); // Requires .bind(this) on function call
+        console.log(name); // Requires .bind(this) on function call
+        console.log(testStatus)
     }
     render() {
+        var { testStatus } = this.props;
         return (
             <div className="navBar">
                 <a onClick={this.handleClickAdd.bind(this)} className="btnAddNode2">
                     +Node2
                 </a>
                 <AddNode name={this.props.name}/>
-                <AddVertex />
+                <AddVertex testStatus={testStatus}/>
                 <DeleteNode />
             </div>
         )
@@ -44,7 +47,7 @@ class AddVertex extends React.Component {
     render() {
         return (
             <a onClick={this.handleClick} className="btnAddVertex">
-                +Vertex
+                +Vertex {this.props.testStatus != null ? this.props.testStatus : 'fart'}
             </a>
         )
     }

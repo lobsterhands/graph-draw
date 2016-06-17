@@ -19,7 +19,7 @@ var GraphDrawApp = React.createClass({
     render: function() {
         return (
             <div className="graphDrawContainer">
-                <NavBar name={this.state.name} />
+                <NavBar name={this.state.name} testStatus="Test passed"/>
                 <GdSVG />
                 <Hello name={this.state.name} lastName="Denman"/>
             </div>
