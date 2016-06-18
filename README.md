@@ -7,7 +7,7 @@ For example, you can build a matrix from a graph or run Dijkstra's algorithm and
 
  ----
 
- TODO:
+# TODO:
     * Learn React JS
     * Learn SVG
     * Get undirected graph (just static nodes and lines) data to update React
