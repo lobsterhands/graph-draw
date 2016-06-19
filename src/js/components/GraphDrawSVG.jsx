@@ -1,32 +1,59 @@
 import React from 'react';
 import Default from '../data/DefaultGraph.jsx';
 
-import data from '../data/data.jsx';
-
 export default class GraphDrawSVG extends React.Component {
+    handleClick(event) {
+        event.preventDefault();
+        console.log(event.screenX);
+    }
     render() {
-        console.log(data[0]);
+        let { data } = this.props;
+        let fasfd;
         return (
             <div classID="GraphDrawSVG">
-                <svg version="1.1"
+                <svg version="1.1" onClick={this.handleClick}
                      baseProfile="full"className="gdSVG" width={600} height={400}>
-                    <rect width="100%" height="100%" fill="red" />
-                    <circle cx="150" cy="100" r="80" fill="green" />
-                    <rect x="0" y="0" width="300" height="300" fill="black" />
-                    <line x1="100" x2="100" y1="0" y2="300" stroke="white" strokeWidth="5"/>
-                    <line x1="200" x2="200" y1="0" y2="300" stroke="white" strokeWidth="5"/>
-                    <line x1="0" x2="300" y1="100" y2="100" stroke="white" strokeWidth="5"/>
-                    <line x1="0" x2="300" y1="200" y2="200" stroke="white" strokeWidth="5"/>
-
-                    <circle cx="100" cy="100" r="20" stroke="blue" fill="transparent" strokeWidth="5"/>
-                    <circle cx="200" cy="200" r="20" stroke="blue" fill="transparent" strokeWidth="5"/>
-
-                    <line x1="114.2" x2="185.8" y1="114.2" y2="185.8" stroke="white" strokeWidth="5"/>
-                    {/*<circle cx="25" cy="75" r="20" stroke="blue" fill="transparent" strokeWidth="5"/>
-                    <line x1="25" x2="45" y1="75" y2="150" stroke="orange" fill="transparent" strokeWidth="5"/>
-                     <text x="150" y="125" fontSize="60" textAnchor="middle" fill="white">SVG</text>*/}
+                    {
+                        data.map((d, i) => {
+                            var arr = [
+                                <Circle x={d.x} y={d.y} r={d.radius} />
+                            ];
+                            if(i > 0) {
+                                // var line = this.getLineFromTo(data[i-1].x, d.x, data[i-1].y, d.y, d.radius);
+                                // console.log(line);
+                                arr.push(
+                                    <Line x1={data[i-1].x} y1={data[i-1].y} x2={d.x} y2={d.y} />
+                                );
+                            }
+                            return (
+                                arr
+                            )
+                        })
+                    }
                 </svg>
             </div>
         )
+    }
+}
+
+class Circle extends React.Component {
+    handleClick(event) {
+        event.preventDefault();
+        console.log(event);
+    }
+    render() {
+        let { x, y, r} = this.props;
+        return (
+            <circle className="draggable" cx={x} cy={y} r={r} stroke="black" strokeWidth="5"/>
+        );
+    }
+}
+
+class Line extends React.Component {
+    render() {
+        let { x1, y1, x2, y2} = this.props;
+        return (
+            <line x1={x1} y1={y1} x2={x2} y2={y2} stroke="black" strokeWidth="5"/>
+        );
     }
 }

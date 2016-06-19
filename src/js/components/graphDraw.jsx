@@ -8,25 +8,28 @@ import ReactDOM from 'react-dom';
 
 import NavBar from './NavBar.jsx';
 import GdSVG from './GraphDrawSVG.jsx';
-import Hello from './SayHello.jsx';
+
+import data from '../data/data.jsx';
 
 var GraphDrawApp = React.createClass({
     getInitialState: function() {
         return {
-            name: 'Lyle'
+            name: 'Lyle',
+            data: data,
+            fart: null
         }
     },
     render: function() {
         return (
-            <div className="graphDrawContainer">
+            <div className="graphDraw">
                 <NavBar name={this.state.name} testStatus="Test passed"/>
-                <GdSVG />
-                <Hello name={this.state.name} lastName="Denman"/>
+                <div className="graphDrawContainer">
+                    <GdSVG data={this.state.data} />
+                </div>
             </div>
         )
     }
 });
-
 
 ReactDOM.render(
     <GraphDrawApp />,

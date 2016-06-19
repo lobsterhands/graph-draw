@@ -1,10 +1,12 @@
 /**
  * Created by wally on 6/17/16.
  */
-export default [
-  [1, 3],
-  [2, 5],
-  [3, 2],
-  [4, 16],
-  [18, 5]  
+export default [ 
+    {x: 100, y: 100, radius: 20},
+    {x: 35, y: 200, radius: 20},
+    {x: 200, y: 200, radius: 20},
+    {x: 125, y: 270, radius: 20},
+    {x: 500, y: 350, radius: 20}
+
+
 ];
