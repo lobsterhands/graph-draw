@@ -35,7 +35,7 @@ class AddVertex extends React.Component {
     render() {
         return (
             <a onClick={this.handleClick.bind(this)} className="btnAddVertex">
-                +Vertex
+                +Edge
             </a>
         )
     }
