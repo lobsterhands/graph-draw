@@ -19,7 +19,38 @@ var GraphDrawApp = React.createClass({
             mode: null // Can be "add", "remove", "connect"
         }
     },
-    
+
+    setMode: function(modeString) {
+        switch(modeString) {
+            case "remove":
+                if (this.state.mode != "remove") {
+                    this.setState({
+                        mode: "remove"
+                    });
+                    console.log('mode', modeString);
+                }
+                break;
+            case "add":
+                if (this.state.mode != "add") {
+                    this.setState({
+                        mode: "add"
+                    });
+                    console.log('mode', modeString);
+                }
+                break;
+            case "connect":
+                if (this.state.mode != "connect") {
+                    this.setState({
+                        mode: "connect"
+                    });
+                    console.log('mode', modeString);
+                }
+                break;
+            default:
+                break;
+        }
+    },
+
     addNode: function(x, y, radius, letter) {
         let {data} = this.state;
         var newData = data.slice(); // Make a shallow copy; Also, see Spread
@@ -30,19 +61,9 @@ var GraphDrawApp = React.createClass({
         });
     },
 
-    setRemove: function() {
-        if (this.state.mode != "remove") {
-            this.setState({
-                mode: "remove"
-            });
-            console.log('now removing');
-        }
-    },
-
     removeNode: function(id) {
         let {data} = this.state;
         var newData = data.slice();
-        console.log(id);
 
         if (data.length > 0) {
             newData.splice(id, 1);
@@ -55,9 +76,10 @@ var GraphDrawApp = React.createClass({
     render: function() {
         return (
             <div className="graphDraw">
-                <NavBar addNode={this.addNode} setRemove={this.setRemove} />
+                <NavBar setMode={this.setMode} addNode={this.addNode} />
                 <div className="graphDrawContainer" >
-                    <GdSVG data={this.state.data} mode={this.state.mode} />
+                    <GdSVG data={this.state.data} mode={this.state.mode} 
+                    removeNode={this.removeNode} />
                 </div>
             </div>
         )

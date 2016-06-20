@@ -2,12 +2,12 @@ import React from 'react';
 
 export default class NavBar extends React.Component {
     render() {
-        var { data, addNode, setRemove } = this.props;
+        var { data, addNode, setMode } = this.props;
         return (
             <div className="navBar">
-                <AddNode data={data} addNode={addNode} />
-                <AddVertex />
-                <RemoveNode setRemove={setRemove} />
+                <AddNode data={data} addNode={addNode} setMode={setMode} />
+                <AddVertex setMode={setMode} />
+                <RemoveNode setMode={setMode} />
             </div>
         )
     }
@@ -16,7 +16,7 @@ export default class NavBar extends React.Component {
 class AddNode extends React.Component {
     handleClick(event) {
         this.props.addNode(30, 30, 20);
-        let x;
+        this.props.setMode("add");
     }
     render() {
         return (
@@ -30,7 +30,7 @@ class AddNode extends React.Component {
 class AddVertex extends React.Component {
     handleClick(event) {
         event.preventDefault();
-        console.log('+Vertex');
+        this.props.setMode("connect");
     }
     render() {
         return (
@@ -44,8 +44,7 @@ class AddVertex extends React.Component {
 class RemoveNode extends React.Component {
     handleClick(event) {
         event.preventDefault();
-        console.log('-Node');
-        this.props.setRemove();
+        this.props.setMode("remove");
     }
     render() {
         return (

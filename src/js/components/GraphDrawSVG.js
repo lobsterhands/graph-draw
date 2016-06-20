@@ -5,7 +5,7 @@ import Line from './Line';
 
 export default class GraphDrawSVG extends React.Component {
     render() {
-        let { data, mode } = this.props;
+        let { data, mode, removeNode } = this.props;
         return (
             <div classID="GraphDrawSVG">
                 <svg version="1.1" baseProfile="full"className="gdSVG"
@@ -21,7 +21,7 @@ export default class GraphDrawSVG extends React.Component {
                             }
                             arr.push(
                                 <Circle x={d.x} y={d.y} r={d.radius} id={i} 
-                                    mode={this.props.mode}
+                                    mode={mode} removeNode={removeNode}
                                 />
                             );
                             return (
