@@ -2,10 +2,10 @@ import React from 'react';
 
 export default class NavBar extends React.Component {
     render() {
-        var { data } = this.props;
+        var { data, addNode } = this.props;
         return (
             <div className="navBar">
-                <AddNode data={data} />
+                <AddNode data={data} addNode={addNode} />
                 <AddVertex />
                 <DeleteNode />
             </div>
@@ -15,11 +15,8 @@ export default class NavBar extends React.Component {
 
 class AddNode extends React.Component {
     handleClick(event) {
-        let { data } = this.props;
-        event.preventDefault();
-        console.log('+Node');
-        data.push({x: 10, y: 10, radius: 20});
-        console.log(data);
+        this.props.addNode(30, 30, 20);
+        let x;
     }
     render() {
         return (
