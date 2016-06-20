@@ -1,3 +1,13 @@
+* {
+    -webkit-touch-callout: none; /* iOS Safari */
+    -webkit-user-select: none;   /* Chrome/Safari/Opera */
+    -khtml-user-select: none;    /* Konqueror */
+    -moz-user-select: none;      /* Firefox */
+    -ms-user-select: none;       /* Internet Explorer/Edge */
+    user-select: none;           /* Non-prefixed version, currently
+                                  not supported by any browser */
+}
+
 .graphDrawContainer {
     max-width: 960px;
     margin: 0 auto;
@@ -29,6 +39,7 @@ svg {
     margin: 0 auto;
     border: 1px solid gray;
     border-top: 0;
+    /*pointer-events: none;*/
 }
 
 .draggable {
