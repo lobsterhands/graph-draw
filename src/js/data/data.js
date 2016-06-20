@@ -8,11 +8,4 @@ export default [
     // {x: 125, y: 270, radius: 20},
     // {x: 500, y: 350, radius: 20},
     // {x: 550, y: 320, radius: 20}
-
-    {x: 100, y: 100, radius: 20},
-    {x: 50, y: 50, radius: 20},
-    {x: 200, y: 30, radius: 20},
-    {x: 10, y: 200, radius: 20}
 ];
-
-let z;

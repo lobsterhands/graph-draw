@@ -8,7 +8,7 @@ var webpack = require('webpack');
 module.exports = {
     context: __dirname, // where the app lives
     devtool: debug ? "inline-sourcemap" : null,
-    entry: "./src/js/components/GraphDraw.jsx",
+    entry: "./src/js/components/GraphDraw.js",
     module: {
       loaders: [
           {
