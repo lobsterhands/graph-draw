@@ -2,12 +2,12 @@ import React from 'react';
 
 export default class NavBar extends React.Component {
     render() {
-        var { data, addNode } = this.props;
+        var { data, addNode, setRemove } = this.props;
         return (
             <div className="navBar">
                 <AddNode data={data} addNode={addNode} />
                 <AddVertex />
-                <DeleteNode />
+                <RemoveNode setRemove={setRemove} />
             </div>
         )
     }
@@ -41,10 +41,11 @@ class AddVertex extends React.Component {
     }
 }
 
-class DeleteNode extends React.Component {
+class RemoveNode extends React.Component {
     handleClick(event) {
         event.preventDefault();
         console.log('-Node');
+        this.props.setRemove();
     }
     render() {
         return (
