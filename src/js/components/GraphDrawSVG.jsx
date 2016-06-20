@@ -16,15 +16,16 @@ export default class GraphDrawSVG extends React.Component {
                     {
                         data.map((d, i) => {
                             var arr = [
-                                <Circle x={d.x} y={d.y} r={d.radius} />
+
                             ];
                             if(i > 0) {
-                                // var line = this.getLineFromTo(data[i-1].x, d.x, data[i-1].y, d.y, d.radius);
-                                // console.log(line);
                                 arr.push(
                                     <Line x1={data[i-1].x} y1={data[i-1].y} x2={d.x} y2={d.y} />
                                 );
                             }
+                            arr.push(
+                                <Circle x={d.x} y={d.y} r={d.radius} />
+                            );
                             return (
                                 arr
                             )
@@ -43,17 +44,34 @@ class Circle extends React.Component {
     }
     render() {
         let { x, y, r} = this.props;
+        let xz;
         return (
-            <circle className="draggable" cx={x} cy={y} r={r} stroke="black" strokeWidth="5"/>
+            <circle className="draggable" cx={x} cy={y} r={r} stroke="black"
+                    strokeWidth="5"/>
         );
     }
 }
 
 class Line extends React.Component {
+    getLineFromTo(x1, y1, x2, y2, radius = 20) {
+        // This function avoids the problem of a non-draggable line interrupting
+        // a draggable circle
+
+        // angleRadians must be negative to account for SVG's coordinate system
+        var angleRadians = -Math.atan2(y2 - y1, x2 - x1);
+
+        var xS = x1 + radius * Math.cos(angleRadians);
+        var yS = y1 + radius * Math.sin(-angleRadians);
+
+        return {xStart: xS, yStart: yS, xEnd: x2, yEnd: y2};
+    }
     render() {
         let { x1, y1, x2, y2} = this.props;
+        var line = this.getLineFromTo(x1, y1, x2, y2);
+        console.log(line);
         return (
-            <line x1={x1} y1={y1} x2={x2} y2={y2} stroke="black" strokeWidth="5"/>
+            <line x1={line.xStart} y1={line.yStart} x2={line.xEnd} y2={line.yEnd}
+                  stroke="black" strokeWidth="5"/>
         );
     }
 }
