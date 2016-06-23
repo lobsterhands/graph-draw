@@ -7,7 +7,9 @@ export default class Circle extends React.Component {
     render() {
         let { x, y, r, id, mode, removeNode } = this.props;
         
-        var handleClick = function() {
+        var handleClick = function(event) {
+            console.log(event);
+
             if (mode === "remove") {
                 removeNode(id);
             }
@@ -15,6 +17,13 @@ export default class Circle extends React.Component {
             if (mode === "connect") {
                 console.log('gonna connect nodes');
             }
+
+            if (mode === "add") {
+                console.log('cannot add on top');
+            }
+
+            // TODO: can I use the x,y values and then just get a mouse
+            // offset to move the circle?
         };
         
         return (
