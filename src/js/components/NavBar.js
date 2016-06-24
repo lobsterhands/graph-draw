@@ -15,7 +15,6 @@ export default class NavBar extends React.Component {
 
 class AddNode extends React.Component {
     handleClick(event) {
-        this.props.addNode(30, 30, 20);
         this.props.setMode("add");
     }
     render() {
