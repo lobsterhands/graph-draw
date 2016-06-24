@@ -4,16 +4,22 @@ import Circle from './Circle';
 import Line from './Line';
 
 export default class GraphDrawSVG extends React.Component {
-    static clickHandler(event) {
-        console.log('clicked');
-    }
+
     render() {
-        let { data, mode, removeNode } = this.props;
+        let { data, mode, addNode, removeNode } = this.props;
+        var clickHandler = function(event) {
+            var trueX = event.clientX - Math.floor(((window.innerWidth - 600)/2));
+            var trueY = event.clientY - 125;
+            if (mode === "add") {
+                addNode(trueX, trueY, 20);
+            }
+        };
         return (
             <div classID="GraphDrawSVG">
-                <svg version="1.1" baseProfile="full"className="gdSVG"
-                     width={600} height={400} viewBox="0 0 1200 800"
-                     onClick={(mode === "add") ? GraphDrawSVG.clickHandler : null}>
+                <svg className="gdSVG"
+                     width={600} height={400}
+                     onClick={/*(mode === "add") ? GraphDrawSVG.clickHandler
+                      : null*/ clickHandler}>
                     {
                         data.map((d, i) => {
                             // Push Circle to array last so it's on top of line
