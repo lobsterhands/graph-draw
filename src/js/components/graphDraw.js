@@ -78,8 +78,7 @@ var GraphDrawApp = React.createClass({
             <div className="graphDraw">
                 <NavBar setMode={this.setMode} addNode={this.addNode} />
                 <div className="graphDrawContainer" >
-                    <GdSVG data={this.state.data} mode={this.state.mode} 
-                    removeNode={this.removeNode} />
+                    <GdSVG data={this.state.data} mode={this.state.mode} addNode={this.addNode} removeNode={this.removeNode} />
                 </div>
             </div>
         )
