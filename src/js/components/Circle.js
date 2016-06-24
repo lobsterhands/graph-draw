@@ -6,9 +6,11 @@ import React from 'react';
 export default class Circle extends React.Component {
     render() {
         let { x, y, r, id, mode, removeNode } = this.props;
-        
+
+
         var handleClick = function(event) {
-            console.log(event);
+            console.log('svgX', x);
+            console.log('svgY', y);
 
             if (mode === "remove") {
                 removeNode(id);
