@@ -20,4 +20,4 @@ For example, you can build a matrix from a graph or run Dijkstra's algorithm and
     each circle.)
     * Create draggable SVG elements ()
     * Get lines to update as nodes are dragged ()
-    *
+    * When adding edges, Double-click to select primary node; single-click to connect to other nodes
