@@ -25,13 +25,12 @@ export default class GraphDrawSVG extends React.Component {
             <div classID="GraphDrawSVG">
                 <svg className={className}
                      width={600} height={400}
-                     onClick={/*(mode === "add") ? GraphDrawSVG.clickHandler
-                      : null*/ clickHandler}>
+                     onClick={clickHandler}>
                     {
                         data.map((d, i) => {
                             // Push Circle to array last so it's on top of line
                             var arr = [];
-                            if (d.connections) {
+                            if (d.connections && i > 0) {
                                 d.connections.map((dc, j) => {
                                     arr.push(
                                             <Line x1={data[i].x} y1={data[i].y} x2={data[dc].x} y2={data[dc].y} />

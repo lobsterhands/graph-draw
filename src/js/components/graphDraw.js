@@ -72,6 +72,10 @@ var GraphDrawApp = React.createClass({
                 data: newData
             });
         }
+
+        // TODO: To avoid loss of id consistency after a delete, consider
+        // giving each circle an actual id as they are created; then, if it
+        // goes away you don't lose the actual connects to any given node
     },
 
     addEdge: function(source, dest) {
