@@ -16,7 +16,8 @@ var GraphDrawApp = React.createClass({
     getInitialState: function() {
         return {
             data: data,
-            mode: null // Can be "add", "remove", "connect"
+            mode: null, // Can be "add", "remove", "connect"
+            currentId: null
         }
     },
 
@@ -52,17 +53,17 @@ var GraphDrawApp = React.createClass({
     },
 
     addNode: function(x, y, radius, letter) {
-        let {data} = this.state;
+        let { data } = this.state;
         var newData = data.slice(); // Make a shallow copy; Also, see Spread
         // (...)
-        newData.push({x: x, y: y, radius: radius});
+        newData.push({x: x, y: y, radius: radius, connections: []});
         this.setState({
             data: newData
         });
     },
 
     removeNode: function(id) {
-        let {data} = this.state;
+        let { data } = this.state;
         var newData = data.slice();
 
         if (data.length > 0) {
@@ -73,12 +74,36 @@ var GraphDrawApp = React.createClass({
         }
     },
 
+    addEdge: function(source, dest) {
+        let { data } = this.state;
+        var newData = data.slice();
+
+        if (source != dest) {
+            newData[source].connections.push(dest);
+            newData[dest].connections.push(source);
+        }
+
+        this.setState({
+            data: newData
+        });
+    },
+
+    setCurrentId: function(id) {
+        this.setState({
+            currentId: id
+        });
+    },
+
     render: function() {
         return (
             <div className="graphDraw">
                 <NavBar setMode={this.setMode} addNode={this.addNode} />
                 <div className="graphDrawContainer" >
-                    <GdSVG data={this.state.data} mode={this.state.mode} addNode={this.addNode} removeNode={this.removeNode} />
+                    <GdSVG data={this.state.data} mode={this.state.mode}
+                       addNode={this.addNode} removeNode={this.removeNode}
+                       addEdge={this.addEdge} currentId={this.state.currentId}
+                        setCurrentId={this.setCurrentId}
+                    />
                 </div>
             </div>
         )
