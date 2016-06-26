@@ -45,3 +45,15 @@ svg {
 .draggable {
     cursor: move;
 }
+
+.addNode {
+    cursor: crosshair;
+}
+
+.removeNode {
+    cursor: no-drop;
+}
+
+.addEdge {
+    cursor: ew-resize;
+}
