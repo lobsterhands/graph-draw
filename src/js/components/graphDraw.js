@@ -5,10 +5,8 @@
 
 import React from 'react';
 import ReactDOM from 'react-dom';
-
 import NavBar from './NavBar';
 import GdSVG from './GraphDrawSVG';
-
 import data from '../data/data';
 
 var GraphDrawApp = React.createClass({
@@ -17,7 +15,8 @@ var GraphDrawApp = React.createClass({
         return {
             data: data,
             mode: null, // Can be "add", "remove", "connect"
-            currentId: null
+            currentId: null, // the currently selected node
+            nodeId: 0 // Total nodes created for providing unique id's
         }
     },
 
@@ -26,25 +25,25 @@ var GraphDrawApp = React.createClass({
             case "remove":
                 if (this.state.mode != "remove") {
                     this.setState({
-                        mode: "remove"
+                        mode: "remove",
+                        currentId: null
                     });
-                    console.log('mode', modeString);
                 }
                 break;
             case "add":
                 if (this.state.mode != "add") {
                     this.setState({
-                        mode: "add"
+                        mode: "add",
+                        currentId: null
                     });
-                    console.log('mode', modeString);
                 }
                 break;
             case "connect":
                 if (this.state.mode != "connect") {
                     this.setState({
-                        mode: "connect"
+                        mode: "connect",
+                        currentId: null
                     });
-                    console.log('mode', modeString);
                 }
                 break;
             default:
@@ -52,14 +51,17 @@ var GraphDrawApp = React.createClass({
         }
     },
 
-    addNode: function(x, y, radius, letter) {
-        let { data } = this.state;
+    addNode: function(x, y, radius) {
+        let { data, nodeId } = this.state;
         var newData = data.slice(); // Make a shallow copy; Also, see Spread
         // (...)
-        newData.push({x: x, y: y, radius: radius, connections: []});
+        newData.push({id: nodeId, x: x, y: y, radius: radius, connections: []});
+        var incNodeId = nodeId + 1;
         this.setState({
-            data: newData
+            data: newData,
+            nodeId: incNodeId
         });
+        console.log(newData);
     },
 
     removeNode: function(id) {
@@ -67,29 +69,41 @@ var GraphDrawApp = React.createClass({
         var newData = data.slice();
 
         if (data.length > 0) {
-            newData.splice(id, 1);
+            newData.map((d, i) => {
+                if (d.id === id) {
+                    newData.splice(i, 1);
+                    this.setState({
+                        data: newData
+                    });
+                }
+            });
+        }
+    },
+
+    findNodeById(array, searchTerm, nodeId) {
+        for (var i = 0; i < array.length; i++) {
+            if (array[i][searchTerm] === nodeId) {
+                return i;
+            }
+        }
+        return -1;
+    },
+
+    addEdge: function(sourceId, destId) {
+        if (sourceId != destId) {
+            let { data } = this.state;
+            var newData = data.slice();
+
+            var sourceIdIndex = this.findNodeById(data, "id", sourceId);
+            var destIdIndex = this.findNodeById(data, "id", destId);
+
+            newData[sourceIdIndex].connections.push(destIdIndex);
+            newData[destIdIndex].connections.push(sourceIdIndex);
+
             this.setState({
                 data: newData
             });
         }
-
-        // TODO: To avoid loss of id consistency after a delete, consider
-        // giving each circle an actual id as they are created; then, if it
-        // goes away you don't lose the actual connects to any given node
-    },
-
-    addEdge: function(source, dest) {
-        let { data } = this.state;
-        var newData = data.slice();
-
-        if (source != dest) {
-            newData[source].connections.push(dest);
-            newData[dest].connections.push(source);
-        }
-
-        this.setState({
-            data: newData
-        });
     },
 
     setCurrentId: function(id) {
@@ -106,7 +120,7 @@ var GraphDrawApp = React.createClass({
                     <GdSVG data={this.state.data} mode={this.state.mode}
                        addNode={this.addNode} removeNode={this.removeNode}
                        addEdge={this.addEdge} currentId={this.state.currentId}
-                        setCurrentId={this.setCurrentId}
+                        setCurrentId={this.setCurrentId} nodeId={this.state.nodeId}
                     />
                 </div>
             </div>

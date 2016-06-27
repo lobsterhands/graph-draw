@@ -6,11 +6,12 @@ import Line from './Line';
 export default class GraphDrawSVG extends React.Component {
 
     render() {
-        let { data, mode, addNode, removeNode, addEdge, currentId, setCurrentId } = this.props;
+        let { data, mode, addNode, removeNode, addEdge, currentId, nodeId, setCurrentId } = this.props;
+
         var clickHandler = function(event) {
-            var trueX = event.clientX - Math.floor(((window.innerWidth - 600)/2));
-            var trueY = event.clientY - 125;
             if (mode === "add") {
+                var trueX = event.clientX - Math.floor(((window.innerWidth - 600)/2));
+                var trueY = event.clientY - 125;
                 addNode(trueX, trueY, 20);
             }
         };
@@ -36,10 +37,9 @@ export default class GraphDrawSVG extends React.Component {
                                             <Line x1={data[i].x} y1={data[i].y} x2={data[dc].x} y2={data[dc].y} />
                                         );
                                 });
-                                
                             }
                             arr.push(
-                                <Circle x={d.x} y={d.y} r={d.radius} id={i} 
+                                <Circle x={d.x} y={d.y} r={d.radius} id={d.id}
                                     mode={mode} removeNode={removeNode}
                                     addEdge={addEdge} currentId={currentId}
                                     setCurrentId={setCurrentId}

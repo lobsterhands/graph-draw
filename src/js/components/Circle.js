@@ -6,17 +6,13 @@ import React from 'react';
 export default class Circle extends React.Component {
     render() {
         let { x, y, r, id, currentId, mode, removeNode, addEdge, setCurrentId } = this.props;
-
         var handleClick = function(event) {
-            console.log('svgX', x);
-            console.log('svgY', y);
-
             if (mode === "remove") {
+                console.log('id',id);
                 removeNode(id);
             }
 
             if (mode === "connect") {
-                console.log('gonna connect nodes');
                 if (currentId == null) {
                     console.log('first: ' + id);
                     setCurrentId(id);
