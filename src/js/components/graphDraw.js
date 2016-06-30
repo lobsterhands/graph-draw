@@ -97,8 +97,17 @@ var GraphDrawApp = React.createClass({
             var sourceIdIndex = this.findNodeById(data, "id", sourceId);
             var destIdIndex = this.findNodeById(data, "id", destId);
 
-            newData[sourceIdIndex].connections.push(destIdIndex);
-            newData[destIdIndex].connections.push(sourceIdIndex);
+            // check for existing node connection
+            var connectionExists = false;
+            for (var i = 0; i < newData[sourceIdIndex].connections.length; i++) {
+                if (newData[sourceIdIndex].connections[i] == destIdIndex) {
+                    connectionExists = true;
+                }
+            }
+            if (!connectionExists) {
+                newData[sourceIdIndex].connections.push(destIdIndex);
+                newData[destIdIndex].connections.push(sourceIdIndex);
+            }
 
             this.setState({
                 data: newData
