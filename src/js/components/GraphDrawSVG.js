@@ -2,6 +2,7 @@ import React from 'react';
 
 import Circle from './Circle';
 import Line from './Line';
+import Rectangle from './Rectangle';
 
 export default class GraphDrawSVG extends React.Component {
 
@@ -44,6 +45,9 @@ export default class GraphDrawSVG extends React.Component {
                                     addEdge={addEdge} currentId={currentId}
                                     setCurrentId={setCurrentId}
                                 />
+                            );
+                            arr.push(
+                                <Rectangle />
                             );
                             return (
                                 arr

@@ -80,6 +80,8 @@ var GraphDrawApp = React.createClass({
         }
     },
 
+    // TODO: WATCH REACT VIDEOS AND LEARN STUFF BEFORE CONTINUING; YOU'RE
+    // ABOUT OVER YOUR HEAD
     findNodeById(array, searchTerm, nodeId) {
         for (var i = 0; i < array.length; i++) {
             if (array[i][searchTerm] === nodeId) {
